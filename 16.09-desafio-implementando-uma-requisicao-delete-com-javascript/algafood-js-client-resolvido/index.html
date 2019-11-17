@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AlgaFood</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <style>
+    .row {
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <button id="btn-consultar" class="btn btn-primary">Consultar</button>
+    </div>
+
+    <div class="row">
+      <table id="tabela" class="table table-striped table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3">Nenhuma forma de pagamento encontrada</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <form>
+        <div class="form-group">
+          <label for="campo-descricao">Descrição</label>
+          <input type="text" class="form-control" id="campo-descricao">
+        </div>
+        <button type="button" class="btn btn-primary" id="btn-cadastrar">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <script src="client.js"></script>
+</body>
+</html>
