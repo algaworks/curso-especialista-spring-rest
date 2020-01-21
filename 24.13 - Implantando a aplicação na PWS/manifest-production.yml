@@ -1,0 +1,3 @@
+env:
+  JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 13.+ }}'
+  SPRING_PROFILES_ACTIVE: production
