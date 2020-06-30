@@ -41,7 +41,7 @@ public class CidadeController {
 	public ResponseEntity<Cidade> buscar(@PathVariable Long cidadeId) {
 		Optional<Cidade> cidade = cidadeRepository.findById(cidadeId);
 		
-		if (cidade != null) {
+		if (cidade.isPresent()) {
 			return ResponseEntity.ok(cidade.get());
 		}
 		
