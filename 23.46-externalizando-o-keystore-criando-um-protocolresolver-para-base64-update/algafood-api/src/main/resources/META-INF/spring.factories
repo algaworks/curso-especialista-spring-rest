@@ -1,0 +1,1 @@
+org.springframework.context.ApplicationContextInitializer=com.algaworks.algafood.core.io.Base64ProtocolResolver
