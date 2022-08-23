@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd"
+    version="2.2">
+
+	<named-query name="Restaurante.consultarPorNome">
+		<query>
+		from Restaurante
+		where nome like concat('%', :nome, '%')
+		and cozinha.id = :id
+		</query>
+	</named-query>
+
+	<named-query name="Restaurante.existsResponsavel">
+		<query>
+		select case when count(1) > 0 then true else false end
+		from Restaurante rest
+		join rest.responsaveis resp
+		where rest.id = :restauranteId
+		and resp.id = :usuarioId
+		</query>
+	</named-query>
+	
+		<named-query name="Pedido.isPedidoGerenciadoPor">
+		<query>
+		select case when count(1) > 0 then true else false end
+		from Pedido ped
+		join ped.restaurante rest
+		join rest.responsaveis resp
+		where ped.codigo = :codigoPedido 
+		and resp.id = :usuarioId
+		</query>
+	</named-query>
+	
+</entity-mappings>
