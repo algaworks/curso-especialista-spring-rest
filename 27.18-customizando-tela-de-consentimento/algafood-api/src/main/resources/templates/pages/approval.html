@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>Autorização de acesso</title>
+  <style>
+        body {
+            background-color: aliceblue;
+        }
+    </style>
+  <script>
+		function cancelConsent() {
+			document.consent_form.reset();
+			document.consent_form.submit();
+		}
+	</script>
+</head>
+<body>
+<div class="container">
+  <div class="py-5">
+    <h1 class="text-center text-primary">Permissões</h1>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <p>
+        Essa aplicação
+        <span class="font-weight-bold text-primary" th:text="${clientId}"></span>
+        quer acessar a sua conta
+        <span class="font-weight-bold" th:text="${principalName}"></span>
+      </p>
+    </div>
+  </div>
+  <div class="row pb-3">
+    <div class="col text-center"><p>A aplicação a seguir solicitou as seguintes permissões:</p></div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <form name="consent_form" method="post" th:action="@{/oauth2/authorize}">
+        <input type="hidden" name="client_id" th:value="${clientId}">
+        <input type="hidden" name="state" th:value="${state}">
+
+        <div th:each="scope: ${scopesParaAprovar}" class="form-group form-check py-1">
+          <input class="form-check-input"
+                 type="checkbox"
+                 name="scope"
+                 th:value="${scope}"
+                 th:id="${scope}">
+          <label class="form-check-label font-weight-bold" th:for="${scope}" th:text="${scope}"></label>
+        </div>
+
+        <p th:if="${not #lists.isEmpty(scopesAprovadosAnteriormente)}">Você já autorizou as seguintes permissões:</p>
+        <div th:each="scope: ${scopesAprovadosAnteriormente}" class="form-group form-check py-1">
+          <input class="form-check-input"
+                 type="checkbox"
+                 th:id="${scope}"
+                 disabled
+                 checked>
+          <label class="form-check-label font-weight-bold" th:for="${scope}" th:text="${scope}"></label>
+        </div>
+
+        <div class="form-group pt-3">
+          <button class="btn btn-primary btn-lg" type="submit" id="submit-consent">
+            Autorizar
+          </button>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-link regular" type="button" id="cancel-consent" onclick="cancelConsent();">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row pt-4">
+    <div class="col text-center">
+      <p>
+        <small>
+          O seu consentimento é necessário para essa aprovação.
+          <br/>Se você não quiser aprovar, clique em Cancelar.
+        </small>
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
