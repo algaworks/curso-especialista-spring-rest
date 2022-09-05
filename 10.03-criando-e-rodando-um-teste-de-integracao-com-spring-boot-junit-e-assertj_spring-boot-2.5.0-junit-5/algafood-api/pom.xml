@@ -16,7 +16,7 @@
   <description>API de delivery de comida</description>
 
   <properties>
-    <java.version>12</java.version>
+    <java.version>17</java.version>
   </properties>
 
   <dependencies>
