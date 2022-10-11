@@ -42,7 +42,7 @@ public class CozinhaController {
 //		return ResponseEntity.ok(cozinha);
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.add(HttpHeaders.LOCATION, "http://api.algafood.local:8080/cozinhas");
+		headers.add(HttpHeaders.LOCATION, "http://localhost:8080/cozinhas");
 		
 		return ResponseEntity
 				.status(HttpStatus.FOUND)
