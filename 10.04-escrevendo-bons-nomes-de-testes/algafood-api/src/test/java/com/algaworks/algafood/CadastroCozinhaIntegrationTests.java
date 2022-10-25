@@ -4,16 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.validation.ConstraintViolationException;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class CadastroCozinhaIntegrationTests {
 
@@ -30,13 +29,18 @@ public class CadastroCozinhaIntegrationTests {
 		assertThat(novaCozinha).isNotNull();
 		assertThat(novaCozinha.getId()).isNotNull();
 	}
-	
-	@Test(expected = ConstraintViolationException.class)
-	public void deveFalhar_QuandoCadastrarCozinhaSemNome() {
+
+	@Test
+	public void testarCadastroCozinhaSemNome() {
 		Cozinha novaCozinha = new Cozinha();
 		novaCozinha.setNome(null);
-		
-		novaCozinha = cadastroCozinha.salvar(novaCozinha);
+
+		ConstraintViolationException erroEsperado =
+				Assertions.assertThrows(ConstraintViolationException.class, () -> {
+					cadastroCozinha.salvar(novaCozinha);
+				});
+
+		assertThat(erroEsperado).isNotNull();
 	}
 
 }
