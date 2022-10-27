@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.1.7.RELEASE</version>
+    <version>2.7.4</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   
@@ -16,61 +16,87 @@
   <description>API de delivery de comida</description>
 
   <properties>
-    <java.version>12</java.version>
-    <modelmapper.version>2.3.0</modelmapper.version>
+    <java.version>17</java.version>
+    <modelmapper.version>3.1.0</modelmapper.version>
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-configuration-processor</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-    	<groupId>org.springframework.boot</groupId>
-    	<artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>mysql</groupId>
-    	<artifactId>mysql-connector-java</artifactId>
-    	<scope>runtime</scope>
-    </dependency>
-    <dependency>
-    	<groupId>org.projectlombok</groupId>
-    	<artifactId>lombok</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>org.flywaydb</groupId>
-    	<artifactId>flyway-core</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>org.apache.commons</groupId>
-    	<artifactId>commons-lang3</artifactId>
-    </dependency>
-    <dependency>
-    	<groupId>io.rest-assured</groupId>
-    	<artifactId>rest-assured</artifactId>
-    	<scope>test</scope>
-    </dependency>
-    
-	<dependency>
-		<groupId>org.modelmapper</groupId>
-		<artifactId>modelmapper</artifactId>
-		<version>${modelmapper.version}</version>
-	</dependency>
+
+      <!-- Starters -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-validation</artifactId>
+      </dependency>
+
+      <!-- Ferramentas -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-devtools</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-configuration-processor</artifactId>
+          <optional>true</optional>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.commons</groupId>
+          <artifactId>commons-lang3</artifactId>
+      </dependency>
+
+      <!-- Banco de dados e JPA -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-data-jpa</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <scope>runtime</scope>
+      </dependency>
+
+      <!-- Lombok -->
+      <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+      </dependency>
+
+      <!-- Flyway -->
+
+      <dependency>
+          <groupId>org.flywaydb</groupId>
+          <artifactId>flyway-core</artifactId>
+      </dependency>
+
+      <dependency>
+          <groupId>org.flywaydb</groupId>
+          <artifactId>flyway-mysql</artifactId>
+      </dependency>
+
+      <!--Testes -->
+      <dependency>
+          <groupId>io.rest-assured</groupId>
+          <artifactId>rest-assured</artifactId>
+          <scope>test</scope>
+      </dependency>
+
+      <!-- Model Mapper-->
+      <dependency>
+          <groupId>org.modelmapper</groupId>
+          <artifactId>modelmapper</artifactId>
+          <version>${modelmapper.version}</version>
+      </dependency>
   </dependencies>
 
   <build>
@@ -86,3 +112,4 @@
   </build>
 
 </project>
+
