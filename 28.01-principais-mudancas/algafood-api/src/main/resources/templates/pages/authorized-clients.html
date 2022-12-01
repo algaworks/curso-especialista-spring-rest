@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Clientes autorizados</title>
+<body>
+<div style="margin: 32px">
+    <h1>Clientes autorizados</h1>
+    <p th:if="${#lists.isEmpty(clients)}">Não existem clientes autorizados.</p>
+    <table th:if="${not #lists.isEmpty(clients)}" class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client,iterStat : ${clients}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${client.clientName}">AlgaFood Web</td>
+            <td><button class="btn btn-primary js-btn-on-click-revoke" th:data-clientid="${client.clientId}">Revogar acesso</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <form id="revokeForm" style="display: none" action="/oauth2/authorized-clients/revoke" method="POST">
+        <input id="clientIdInput" name="client_id" type="hidden">
+    </form>
+</div>
+<script>
+    const elements = document.querySelectorAll('.js-btn-on-click-revoke');
+    const form = document.getElementById('revokeForm');
+    const input = document.getElementById('clientIdInput');
+    elements.forEach(element => {
+       element.addEventListener('click', (e)=>{
+            input.value = element.dataset.clientid;
+            form.submit();
+       });
+    });
+</script>
+</body>
+</html>
