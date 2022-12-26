@@ -47,7 +47,7 @@ public class AlgaLinks {
 
 		String pedidosUrl = linkTo(PedidoController.class).toUri().toString();
 
-		return new Link(UriTemplate.of(pedidosUrl,
+		return Link.of(UriTemplate.of(pedidosUrl,
 				PAGINACAO_VARIABLES.concat(filtroVariables)), rel);
 	}
 
@@ -78,7 +78,7 @@ public class AlgaLinks {
 	public Link linkToRestaurantes(String rel) {
 		String restaurantesUrl = linkTo(RestauranteController.class).toUri().toString();
 
-		return new Link(UriTemplate.of(restaurantesUrl, PROJECAO_VARIABLES), rel);
+		return Link.of(UriTemplate.of(restaurantesUrl, PROJECAO_VARIABLES), rel);
 	}
 
 	public Link linkToRestaurantes() {

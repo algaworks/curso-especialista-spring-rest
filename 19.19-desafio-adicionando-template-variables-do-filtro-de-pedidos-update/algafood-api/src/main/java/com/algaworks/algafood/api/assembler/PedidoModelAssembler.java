@@ -50,7 +50,7 @@ public class PedidoModelAssembler
 
 		String pedidosUrl = linkTo(PedidoController.class).toUri().toString();
 
-		pedidoModel.add(new Link(UriTemplate.of(pedidosUrl,
+		pedidoModel.add(Link.of(UriTemplate.of(pedidosUrl,
 				pageVariables.concat(filtroVariables)), "pedidos"));
 
 //		pedidoModel.add(linkTo(PedidoController.class).withRel("pedidos"));
