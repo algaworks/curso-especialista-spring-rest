@@ -21,8 +21,7 @@ import com.algaworks.algafood.domain.model.Grupo;
 import com.algaworks.algafood.domain.service.CadastroGrupoService;
 
 @RestController
-@RequestMapping(path = "/v1/grupos/{grupoId}/permissoes",
-		produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/grupos/{grupoId}/permissoes")
 public class GrupoPermissaoController implements GrupoPermissaoControllerOpenApi {
 
 	@Autowired
@@ -35,7 +34,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenApi
 	private AlgaLinks algaLinks;
 	
 	@Override
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public CollectionModel<PermissaoModel> listar(@PathVariable Long grupoId) {
 		Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
 		
