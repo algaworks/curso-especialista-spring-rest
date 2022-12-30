@@ -39,7 +39,7 @@ import com.algaworks.algafood.domain.service.EmissaoPedidoService;
 import com.algaworks.algafood.infrastructure.repository.spec.PedidoSpecs;
 
 @RestController
-@RequestMapping(path = "/v1/pedidos", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/pedidos")
 public class PedidoController implements PedidoControllerOpenApi {
 
 	@Autowired
@@ -61,7 +61,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 	private PagedResourcesAssembler<Pedido> pagedResourcesAssembler;
 	
 	@Override
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public PagedModel<PedidoResumoModel> pesquisar(PedidoFilter filtro, 
 			@PageableDefault(size = 10) Pageable pageable) {
 		Pageable pageableTraduzido = traduzirPageable(pageable);
@@ -75,7 +75,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 	}
 	
 	@Override
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public PedidoModel adicionar(@Valid @RequestBody PedidoInput pedidoInput) {
 		try {
@@ -94,7 +94,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 	}
 	
 	@Override
-	@GetMapping("/{codigoPedido}")
+	@GetMapping(value = "/{codigoPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PedidoModel buscar(@PathVariable String codigoPedido) {
 		Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);
 		
