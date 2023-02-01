@@ -34,7 +34,7 @@ import com.algaworks.algafood.domain.repository.FormaPagamentoRepository;
 import com.algaworks.algafood.domain.service.CadastroFormaPagamentoService;
 
 @RestController
-@RequestMapping(path = "/v1/formas-pagamento", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/formas-pagamento")
 public class FormaPagamentoController implements FormaPagamentoControllerOpenApi {
 
 	@Autowired
@@ -78,7 +78,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 	}
 	
 	@Override
-	@GetMapping("/{formaPagamentoId}")
+	@GetMapping(value = "/{formaPagamentoId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<FormaPagamentoModel> buscar(@PathVariable Long formaPagamentoId,
 			ServletWebRequest request) {
 		
@@ -108,7 +108,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 	}
 	
 	@Override
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public FormaPagamentoModel adicionar(@RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
 		FormaPagamento formaPagamento = formaPagamentoInputDisassembler.toDomainObject(formaPagamentoInput);
@@ -119,7 +119,7 @@ public class FormaPagamentoController implements FormaPagamentoControllerOpenApi
 	}
 	
 	@Override
-	@PutMapping("/{formaPagamentoId}")
+	@PutMapping(value = "/{formaPagamentoId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public FormaPagamentoModel atualizar(@PathVariable Long formaPagamentoId,
 			@RequestBody @Valid FormaPagamentoInput formaPagamentoInput) {
 		FormaPagamento formaPagamentoAtual = cadastroFormaPagamento.buscarOuFalhar(formaPagamentoId);

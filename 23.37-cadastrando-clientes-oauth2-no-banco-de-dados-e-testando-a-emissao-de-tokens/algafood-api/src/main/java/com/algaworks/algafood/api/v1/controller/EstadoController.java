@@ -29,7 +29,7 @@ import com.algaworks.algafood.domain.repository.EstadoRepository;
 import com.algaworks.algafood.domain.service.CadastroEstadoService;
 
 @RestController
-@RequestMapping(path = "/v1/estados", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/estados")
 public class EstadoController implements EstadoControllerOpenApi {
 
 	@Autowired
@@ -55,7 +55,7 @@ public class EstadoController implements EstadoControllerOpenApi {
 	
 	@CheckSecurity.Estados.PodeConsultar
 	@Override
-	@GetMapping("/{estadoId}")
+	@GetMapping(value = "/{estadoId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public EstadoModel buscar(@PathVariable Long estadoId) {
 		Estado estado = cadastroEstado.buscarOuFalhar(estadoId);
 		
@@ -64,7 +64,7 @@ public class EstadoController implements EstadoControllerOpenApi {
 	
 	@CheckSecurity.Estados.PodeEditar
 	@Override
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public EstadoModel adicionar(@RequestBody @Valid EstadoInput estadoInput) {
 		Estado estado = estadoInputDisassembler.toDomainObject(estadoInput);
@@ -76,7 +76,7 @@ public class EstadoController implements EstadoControllerOpenApi {
 	
 	@CheckSecurity.Estados.PodeEditar
 	@Override
-	@PutMapping("/{estadoId}")
+	@PutMapping(value = "/{estadoId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public EstadoModel atualizar(@PathVariable Long estadoId,
 			@RequestBody @Valid EstadoInput estadoInput) {
 		Estado estadoAtual = cadastroEstado.buscarOuFalhar(estadoId);

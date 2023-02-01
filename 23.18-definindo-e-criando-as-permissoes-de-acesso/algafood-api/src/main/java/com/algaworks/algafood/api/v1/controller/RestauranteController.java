@@ -37,7 +37,7 @@ import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.algaworks.algafood.domain.service.CadastroRestauranteService;
 
 @RestController
-@RequestMapping(path = "/v1/restaurantes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/restaurantes")
 public class RestauranteController implements RestauranteControllerOpenApi {
 
 	@Autowired
@@ -59,21 +59,21 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	private RestauranteInputDisassembler restauranteInputDisassembler;
 	
 	@Override
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public CollectionModel<RestauranteBasicoModel> listar() {
 		return restauranteBasicoModelAssembler
 				.toCollectionModel(restauranteRepository.findAll());
 	}
 	
 	@Override
-	@GetMapping(params = "projecao=apenas-nome")
+	@GetMapping(params = "projecao=apenas-nome", produces = MediaType.APPLICATION_JSON_VALUE)
 	public CollectionModel<RestauranteApenasNomeModel> listarApenasNomes() {
 		return restauranteApenasNomeModelAssembler
 				.toCollectionModel(restauranteRepository.findAll());
 	}
 	
 	@Override
-	@GetMapping("/{restauranteId}")
+	@GetMapping(value = "/{restauranteId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RestauranteModel buscar(@PathVariable Long restauranteId) {
 		Restaurante restaurante = cadastroRestaurante.buscarOuFalhar(restauranteId);
 		
@@ -81,7 +81,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	}
 	
 	@Override
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public RestauranteModel adicionar(@RequestBody @Valid RestauranteInput restauranteInput) {
 		try {
@@ -94,7 +94,7 @@ public class RestauranteController implements RestauranteControllerOpenApi {
 	}
 	
 	@Override
-	@PutMapping("/{restauranteId}")
+	@PutMapping(value = "/{restauranteId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public RestauranteModel atualizar(@PathVariable Long restauranteId,
 			@RequestBody @Valid RestauranteInput restauranteInput) {
 		try {

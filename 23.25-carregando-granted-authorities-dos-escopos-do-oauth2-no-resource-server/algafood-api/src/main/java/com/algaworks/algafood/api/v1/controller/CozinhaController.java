@@ -32,7 +32,7 @@ import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
 
 @RestController
-@RequestMapping(value = "/v1/cozinhas", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/v1/cozinhas")
 public class CozinhaController implements CozinhaControllerOpenApi {
 
 	@Autowired
@@ -52,7 +52,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 	
 	@CheckSecurity.Cozinhas.PodeConsultar
 	@Override
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pageable) {
 //		System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 		
@@ -66,7 +66,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 	
 	@CheckSecurity.Cozinhas.PodeConsultar
 	@Override
-	@GetMapping("/{cozinhaId}")
+	@GetMapping(value = "/{cozinhaId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public CozinhaModel buscar(@PathVariable Long cozinhaId) {
 		Cozinha cozinha = cadastroCozinha.buscarOuFalhar(cozinhaId);
 		
@@ -75,7 +75,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 
 	@CheckSecurity.Cozinhas.PodeEditar
 	@Override
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public CozinhaModel adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) {
 		Cozinha cozinha = cozinhaInputDisassembler.toDomainObject(cozinhaInput);
@@ -86,7 +86,7 @@ public class CozinhaController implements CozinhaControllerOpenApi {
 	
 	@CheckSecurity.Cozinhas.PodeEditar
 	@Override
-	@PutMapping("/{cozinhaId}")
+	@PutMapping(value = "/{cozinhaId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public CozinhaModel atualizar(@PathVariable Long cozinhaId,
 			@RequestBody @Valid CozinhaInput cozinhaInput) {
 		Cozinha cozinhaAtual = cadastroCozinha.buscarOuFalhar(cozinhaId);

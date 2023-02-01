@@ -67,7 +67,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 	
 	@CheckSecurity.Pedidos.PodePesquisar
 	@Override
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public PagedModel<PedidoResumoModel> pesquisar(PedidoFilter filtro, 
 			@PageableDefault(size = 10) Pageable pageable) {
 		Pageable pageableTraduzido = traduzirPageable(pageable);
@@ -81,7 +81,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 	}
 	
 	@Override
-	@PostMapping
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	public PedidoModel adicionar(@Valid @RequestBody PedidoInput pedidoInput) {
 		try {
@@ -100,7 +100,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 	
 	@CheckSecurity.Pedidos.PodeBuscar
 	@Override
-	@GetMapping("/{codigoPedido}")
+	@GetMapping(value = "/{codigoPedido}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PedidoModel buscar(@PathVariable String codigoPedido) {
 		Pedido pedido = emissaoPedido.buscarOuFalhar(codigoPedido);
 		

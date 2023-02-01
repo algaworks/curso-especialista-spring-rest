@@ -37,8 +37,7 @@ import com.algaworks.algafood.domain.service.FotoStorageService;
 import com.algaworks.algafood.domain.service.FotoStorageService.FotoRecuperada;
 
 @RestController
-@RequestMapping(path = "/v1/restaurantes/{restauranteId}/produtos/{produtoId}/foto",
-		produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/restaurantes/{restauranteId}/produtos/{produtoId}/foto")
 public class RestauranteProdutoFotoController implements RestauranteProdutoFotoControllerOpenApi {
 
 	@Autowired
@@ -55,7 +54,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
 	
 	@CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
 	@Override
-	@PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId,
 			@PathVariable Long produtoId, @Valid FotoProdutoInput fotoProdutoInput,
 			@RequestPart(required = true) MultipartFile arquivo) throws IOException {
@@ -86,7 +85,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
 	
 	@CheckSecurity.Restaurantes.PodeConsultar
 	@Override
-	@GetMapping
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public FotoProdutoModel buscar(@PathVariable Long restauranteId, 
 			@PathVariable Long produtoId) {
 		FotoProduto fotoProduto = catalogoFotoProduto.buscarOuFalhar(restauranteId, produtoId);
