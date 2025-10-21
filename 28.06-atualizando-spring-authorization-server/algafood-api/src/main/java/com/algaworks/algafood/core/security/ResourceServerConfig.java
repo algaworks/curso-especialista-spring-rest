@@ -1,5 +1,6 @@
 package com.algaworks.algafood.core.security;
 
+import org.apache.http.auth.Credentials;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -12,6 +13,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -36,14 +38,14 @@ public class ResourceServerConfig {
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
 
         converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+            Collection<GrantedAuthority> grantedAuthorities  = authoritiesConverter.convert(jwt);
+
             List<String> authorities = jwt.getClaimAsStringList("authorities");
 
             if (authorities == null) {
-                return Collections.emptyList();
+                return grantedAuthorities;
             }
-
-            JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
-            Collection<GrantedAuthority> grantedAuthorities = authoritiesConverter.convert(jwt);
 
             grantedAuthorities.addAll(authorities
                     .stream()
